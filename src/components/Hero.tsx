@@ -131,24 +131,30 @@ export default function Hero() {
 
           {/* Image */}
           <motion.div 
-            initial={{ opacity: 0, scale: 0.9, rotate: -5 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{ duration: 1, ease: 'easeOut', delay: 0.2 }}
-            style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: 'easeOut' }}
+            style={{ position: 'relative', width: '100%', minHeight: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
           >
-            <motion.div
-              animate={{ y: [0, -15, 0] }}
-              transition={{ repeat: Infinity, duration: 6, ease: 'easeInOut' }}
-              style={{ position: 'relative', width: '100%', maxWidth: '500px', aspectRatio: '1/1' }}
-            >
+            {/* Background glow */}
+            <div style={{
+              position: 'absolute',
+              width: '80%', height: '80%',
+              background: 'radial-gradient(circle, var(--color-titanium-200) 0%, transparent 70%)',
+              opacity: 0.2,
+              filter: 'blur(60px)',
+              zIndex: 0,
+            }} className="dark:opacity-10" />
+
+            <div style={{ position: 'relative', zIndex: 1, width: '100%', height: '100%', maxWidth: '500px', aspectRatio: '1/1' }}>
               <Image 
-                src="/hero-ring.png" 
-                alt="PulseRing AI - Nhẫn thông minh theo dõi sức khỏe" 
+                src="/titaniumsilver.png" 
+                alt="PulseRing AI" 
                 fill
                 style={{ objectFit: 'contain' }}
                 priority
               />
-            </motion.div>
+            </div>
           </motion.div>
         </div>
       </div>

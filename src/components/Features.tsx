@@ -78,12 +78,12 @@ export default function Features() {
               zIndex: 0,
             }} className="dark:opacity-10" />
 
-            <div style={{ position: 'relative', zIndex: 1, width: '100%', height: 'auto', maxWidth: '400px', aspectRatio: '1/1', background: '#ffffff', borderRadius: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
+            <div style={{ position: 'relative', zIndex: 1, width: '100%', height: 'auto', maxWidth: '400px', aspectRatio: '1/1', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Image 
-                src="/002-galaxy-ring-titaniumblack-top.jpg" 
-                alt="PulseRing AI Top View" 
+                src="/nhan_xoa_nen.png" 
+                alt="PulseRing AI" 
                 fill
-                style={{ objectFit: 'contain', padding: '1rem' }}
+                style={{ objectFit: 'contain' }}
               />
             </div>
           </motion.div>
