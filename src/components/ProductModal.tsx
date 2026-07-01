@@ -81,44 +81,46 @@ export default function ProductModal() {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           style={{
-            position: 'relative', width: '100%', maxWidth: '800px',
+            position: 'relative', width: '95%', maxWidth: '900px', maxHeight: '90vh',
             background: 'var(--color-surface)', borderRadius: '1.5rem',
-            overflow: 'hidden', display: 'flex', flexDirection: 'column',
+            overflow: 'hidden', display: 'flex',
             boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
           }}
-          className="md:flex-row"
+          className="product-modal-layout"
         >
           {/* Close Button */}
           <button
             onClick={closeProductModal}
             style={{
               position: 'absolute', top: '1rem', right: '1rem', zIndex: 10,
-              background: 'var(--color-background)', border: 'none', borderRadius: '50%',
-              width: '2rem', height: '2rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              cursor: 'pointer', color: 'var(--color-foreground)'
+              background: 'var(--color-surface)', border: '1px solid var(--color-border)', borderRadius: '50%',
+              width: '2.5rem', height: '2.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center',
+              cursor: 'pointer', color: 'var(--color-foreground)', boxShadow: '0 4px 10px rgba(0,0,0,0.1)'
             }}
           >
-            <X size={16} />
+            <X size={18} />
           </button>
 
           {/* Left: Image */}
-          <div style={{
-            flex: '1', background: 'var(--color-background)', padding: '2rem',
+          <div className="product-modal-image" style={{
+            background: 'radial-gradient(circle, var(--color-surface) 0%, var(--color-background) 100%)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            position: 'relative', minHeight: '300px'
+            position: 'relative', borderRight: '1px solid var(--color-border)'
           }}>
-            <div style={{ position: 'relative', width: '100%', height: '100%', maxWidth: '300px', aspectRatio: '1/1' }}>
+            <div style={{ position: 'relative', width: '80%', height: '80%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
               <Image 
                 src={activeColorImage} 
                 alt={`${selectedProductModel} - ${selectedColor}`}
                 fill
-                style={{ objectFit: 'contain' }}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                style={{ objectFit: 'contain', padding: '1rem' }}
+                priority
               />
             </div>
           </div>
 
           {/* Right: Options */}
-          <div style={{ flex: '1', padding: '2rem', display: 'flex', flexDirection: 'column' }}>
+          <div className="product-modal-content" style={{ padding: '2rem', display: 'flex', flexDirection: 'column' }}>
             <h2 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--color-foreground)', marginBottom: '0.5rem' }}>
               {selectedProductModel}
             </h2>
@@ -212,6 +214,32 @@ export default function ProductModal() {
             </div>
           </div>
         </motion.div>
+        
+        <style>{`
+          .product-modal-layout {
+            flex-direction: column;
+          }
+          .product-modal-image {
+            min-height: 250px;
+            width: 100%;
+          }
+          .product-modal-content {
+            width: 100%;
+            overflow-y: auto;
+          }
+          @media (min-width: 768px) {
+            .product-modal-layout {
+              flex-direction: row;
+            }
+            .product-modal-image {
+              width: 50%;
+              min-height: 400px;
+            }
+            .product-modal-content {
+              width: 50%;
+            }
+          }
+        `}</style>
       </div>
     </AnimatePresence>
   )

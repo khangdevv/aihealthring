@@ -6,6 +6,7 @@ import Footer from '@/components/Footer'
 import ThemeProvider from '@/components/Providers'
 import ProductModal from '@/components/ProductModal'
 import CartDrawer from '@/components/CartDrawer'
+import Chatbot from '@/components/Chatbot'
 
 const beVietnamPro = Be_Vietnam_Pro({
   variable: '--font-outfit',
@@ -41,6 +42,7 @@ export default function RootLayout({
           <Footer />
           <ProductModal />
           <CartDrawer />
+          <Chatbot />
         </ThemeProvider>
       </body>
     </html>
