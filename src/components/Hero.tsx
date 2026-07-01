@@ -151,6 +151,7 @@ export default function Hero() {
                 src="/titaniumsilver.png" 
                 alt="PulseRing AI" 
                 fill
+                sizes="(max-width: 768px) 100vw, 500px"
                 style={{ objectFit: 'contain' }}
                 priority
               />
