@@ -54,15 +54,10 @@ export default function Footer() {
                 textDecoration: 'none', marginBottom: '1rem',
               }}
             >
-              <span style={{
-                width: '2rem', height: '2rem',
-                background: 'var(--color-foreground)',
-                borderRadius: '50%',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-background)',
-              }}>P</span>
-              <span style={{ fontWeight: 700, fontSize: '1.125rem' }}>
-                Pulse<span className="gradient-text">Ring</span> AI
+              <span style={{ display: 'flex', alignItems: 'center', fontWeight: 700, fontSize: '1.125rem' }}>
+                Pulse
+                <img src="/ring.png" alt="Ring" style={{ height: '1.25rem', width: 'auto', margin: '0 0.125rem' }} className="dark:invert" />
+                AI
               </span>
             </Link>
             <p style={{ fontSize: '0.875rem', color: 'var(--color-muted)', lineHeight: 1.6, maxWidth: '220px' }}>

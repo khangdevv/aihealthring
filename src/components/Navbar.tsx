@@ -47,15 +47,10 @@ export default function Navbar() {
       <nav className="container-site" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '4rem' }}>
         {/* Logo */}
         <Link href="/" id="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
-          <span style={{
-            width: '2rem', height: '2rem',
-            background: 'var(--color-foreground)',
-            borderRadius: '50%',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: '0.75rem', fontWeight: 700, color: 'var(--color-background)',
-          }}>P</span>
-          <span style={{ fontWeight: 700, fontSize: '1.125rem', letterSpacing: '-0.02em' }}>
-            Pulse<span className="gradient-text">Ring</span> AI
+          <span style={{ display: 'flex', alignItems: 'center', fontWeight: 700, fontSize: '1.125rem', letterSpacing: '-0.02em' }}>
+            Pulse
+            <img src="/ring.png" alt="Ring" style={{ height: '1.25rem', width: 'auto', margin: '0 0.125rem' }} className="dark:invert" />
+            AI
           </span>
         </Link>
 
