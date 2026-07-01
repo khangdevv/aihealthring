@@ -108,6 +108,13 @@ body {
 }
 .dark .gradient-text {
   background: linear-gradient(135deg, var(--color-titanium-100) 0%, var(--color-titanium-400) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.dark .theme-invert {
+  filter: invert(1) hue-rotate(180deg);
 }
 
 

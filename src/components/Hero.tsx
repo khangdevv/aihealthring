@@ -66,12 +66,12 @@ export default function Hero() {
             <h1 style={{ 
               fontSize: 'clamp(2.5rem, 5vw, 4.5rem)', 
               fontWeight: 800, 
-              lineHeight: 1.1,
+              lineHeight: 1.3,
               letterSpacing: '-0.02em',
               color: 'var(--color-foreground)'
             }}>
               Sức khỏe của bạn, <br />
-              <span className="gradient-text">gọn trong một chiếc nhẫn.</span>
+              <span style={{ color: 'var(--color-titanium-500)' }}>gọn trong một chiếc nhẫn.</span>
             </h1>
 
             <p style={{ 

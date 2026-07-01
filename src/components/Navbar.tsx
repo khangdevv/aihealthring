@@ -49,7 +49,7 @@ export default function Navbar() {
         <Link href="/" id="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
           <span style={{ display: 'flex', alignItems: 'center', fontWeight: 700, fontSize: '1.125rem', letterSpacing: '-0.02em' }}>
             Pulse
-            <img src="/ring.png" alt="Ring" style={{ height: '1.25rem', width: 'auto', margin: '0 0.125rem' }} className="dark:invert" />
+            <img src="/ring.png" alt="Ring" style={{ height: '1.25rem', width: 'auto', margin: '0 0.125rem', filter: theme === 'dark' ? 'invert(1)' : 'none' }} />
             AI
           </span>
         </Link>

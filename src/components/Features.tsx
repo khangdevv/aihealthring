@@ -49,7 +49,7 @@ export default function Features() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, color: 'var(--color-foreground)', marginTop: '0.5rem' }}
+            style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 700, color: 'var(--color-foreground)', marginTop: '0.5rem', lineHeight: 1.3 }}
           >
             Công nghệ nhỏ gọn,<br />
             <span style={{ color: 'var(--color-muted)' }}>sức mạnh khổng lồ.</span>
@@ -78,12 +78,12 @@ export default function Features() {
               zIndex: 0,
             }} className="dark:opacity-10" />
 
-            <div style={{ position: 'relative', zIndex: 1, width: '100%', height: '100%', maxWidth: '400px', aspectRatio: '1/1' }}>
+            <div style={{ position: 'relative', zIndex: 1, width: '100%', height: 'auto', maxWidth: '400px', aspectRatio: '1/1', background: '#ffffff', borderRadius: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}>
               <Image 
-                src="/001-galaxy-ring-titaniumblack-front.jpg" 
-                alt="PulseRing AI Front View" 
+                src="/002-galaxy-ring-titaniumblack-top.jpg" 
+                alt="PulseRing AI Top View" 
                 fill
-                style={{ objectFit: 'contain', borderRadius: '1rem', mixBlendMode: 'normal' }}
+                style={{ objectFit: 'contain', padding: '1rem' }}
               />
             </div>
           </motion.div>
@@ -119,11 +119,7 @@ export default function Features() {
           .features-grid {
             grid-template-columns: 0.9fr 1.1fr; /* Image on left, features on right */
             gap: 4rem;
-          }
-          .features-image-container {
-            position: sticky;
-            top: 6rem; /* Sticky effect when scrolling */
-            height: calc(100vh - 12rem);
+            align-items: center; /* Ensures perfect vertical centering between columns */
           }
         }
       `}</style>
