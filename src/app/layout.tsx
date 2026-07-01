@@ -4,6 +4,8 @@ import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import ThemeProvider from '@/components/Providers'
+import ProductModal from '@/components/ProductModal'
+import CartDrawer from '@/components/CartDrawer'
 
 const beVietnamPro = Be_Vietnam_Pro({
   variable: '--font-outfit',
@@ -37,6 +39,8 @@ export default function RootLayout({
           <Navbar />
           <main style={{ flex: 1, paddingTop: '4rem' }}>{children}</main>
           <Footer />
+          <ProductModal />
+          <CartDrawer />
         </ThemeProvider>
       </body>
     </html>

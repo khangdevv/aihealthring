@@ -1,22 +1,33 @@
 'use client'
 
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X, Moon, Sun, ShoppingBag, Heart } from 'lucide-react'
 import { useTheme } from '@/components/Providers'
-import { useEffect, useState } from 'react'
-import { Moon, Sun, Menu, X } from 'lucide-react'
+import { useStore } from '@/store/useStore'
 
 const navLinks = [
-  { href: '#features', label: 'Tính năng' },
-  { href: '#specs', label: 'Thông số' },
-  { href: '#story', label: 'Hành trình' },
-  { href: '#order', label: 'Mua ngay' },
+  { name: 'Tính năng', href: '#features' },
+  { name: 'Thông số', href: '#specs' },
+  { name: 'Hành trình', href: '#story' },
 ]
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const [menuOpen, setMenuOpen] = useState(false)
+
+  // Zustand Store
+  const cart = useStore((state) => state.cart)
+  const wishlist = useStore((state) => state.wishlist)
+  const openCart = useStore((state) => state.openCart)
+  const openWishlist = useStore((state) => state.openWishlist)
+
+  // Calculate totals
+  const cartItemCount = cart.reduce((total, item) => total + item.quantity, 0)
+  const wishlistItemCount = wishlist.length
 
   useEffect(() => {
     setMounted(true)
@@ -36,192 +47,240 @@ export default function Navbar() {
         transition: 'background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease',
         ...(scrolled
           ? {
-              background: 'rgba(var(--navbar-bg, 255 255 255) / 0.85)',
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
-              boxShadow: '0 1px 0 0 var(--color-border)',
+              background: 'var(--color-surface-alpha)',
+              backdropFilter: 'blur(12px)',
+              WebkitBackdropFilter: 'blur(12px)',
+              boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
             }
-          : { background: 'transparent' }),
+          : {
+              background: 'transparent',
+              backdropFilter: 'none',
+              boxShadow: 'none',
+            }),
       }}
     >
-      <nav className="container-site" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '4rem' }}>
-        {/* Logo */}
-        <Link href="/" id="nav-logo" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', textDecoration: 'none' }}>
-          <span style={{ display: 'flex', alignItems: 'center', fontWeight: 700, fontSize: '1.125rem', letterSpacing: '-0.02em' }}>
-            Pulse
-            <img src="/ring.png" alt="Ring" style={{ height: '1.25rem', width: 'auto', margin: '0 0.125rem', filter: theme === 'dark' ? 'invert(1)' : 'none' }} />
-            AI
-          </span>
-        </Link>
+      <div className="container-site">
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '4rem' }}>
+          
+          {/* Logo */}
+          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
+            <Link 
+              href="/" 
+              style={{ color: 'var(--color-foreground)', textDecoration: 'none' }}
+              onClick={(e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+            >
+              <span style={{ display: 'flex', alignItems: 'center', fontWeight: 700, fontSize: '1.125rem' }}>
+                Pulse
+                <img src="/ring.png" alt="Ring" style={{ height: '1.25rem', width: 'auto', margin: '0 0.125rem', filter: mounted && theme === 'dark' ? 'invert(1)' : 'none' }} />
+                AI
+              </span>
+            </Link>
+          </motion.div>
 
-        {/* Desktop links */}
-        <ul style={{ display: 'flex', gap: '0.25rem', listStyle: 'none', margin: 0, padding: 0 }} className="nav-desktop-links">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                id={`nav-link-${link.label}`}
-                style={{
-                  padding: '0.375rem 0.875rem',
-                  borderRadius: '9999px',
-                  fontSize: '0.875rem',
-                  fontWeight: 500,
-                  color: 'var(--color-muted)',
-                  textDecoration: 'none',
-                  transition: 'color 0.2s, background 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  ;(e.currentTarget as HTMLElement).style.color = 'var(--color-foreground)'
-                  ;(e.currentTarget as HTMLElement).style.background = 'var(--color-surface)'
-                }}
-                onMouseLeave={(e) => {
-                  ;(e.currentTarget as HTMLElement).style.color = 'var(--color-muted)'
-                  ;(e.currentTarget as HTMLElement).style.background = 'transparent'
-                }}
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
+          {/* Desktop Nav */}
+          <nav className="hidden md:flex md:items-center md:gap-8">
+            <ul style={{ display: 'flex', gap: '2rem', listStyle: 'none', margin: 0, padding: 0 }}>
+              {navLinks.map((link, i) => (
+                <motion.li key={link.name} initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }}>
+                  <Link
+                    href={link.href}
+                    style={{
+                      color: 'var(--color-muted)',
+                      textDecoration: 'none',
+                      fontSize: '0.875rem',
+                      fontWeight: 500,
+                      transition: 'color 0.2s',
+                    }}
+                    onMouseEnter={(e) => e.currentTarget.style.color = 'var(--color-foreground)'}
+                    onMouseLeave={(e) => e.currentTarget.style.color = 'var(--color-muted)'}
+                  >
+                    {link.name}
+                  </Link>
+                </motion.li>
+              ))}
+            </ul>
+          </nav>
 
-        {/* Right side */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-          {/* Dark mode toggle */}
-          {mounted && (
+          {/* Right Actions */}
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+            
+            {/* Wishlist Button */}
             <button
-              id="theme-toggle"
-              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              aria-label="Toggle dark mode"
+              onClick={openWishlist}
               style={{
-                width: '2.25rem', height: '2.25rem',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                borderRadius: '50%',
+                background: 'transparent',
+                border: 'none',
+                color: 'var(--color-muted)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '0.5rem',
+                position: 'relative'
+              }}
+              title="Danh sách yêu thích"
+            >
+              <Heart size={20} />
+              {mounted && wishlistItemCount > 0 && (
+                <span style={{
+                  position: 'absolute', top: '0px', right: '0px',
+                  background: 'var(--color-foreground)', color: 'var(--color-background)',
+                  fontSize: '0.65rem', fontWeight: 700, width: '16px', height: '16px',
+                  borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                }}>
+                  {wishlistItemCount}
+                </span>
+              )}
+            </button>
+
+            {/* Cart Button */}
+            <button
+              onClick={openCart}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: 'var(--color-muted)',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '0.5rem',
+                position: 'relative'
+              }}
+              title="Giỏ hàng"
+            >
+              <ShoppingBag size={20} />
+              {mounted && cartItemCount > 0 && (
+                <span style={{
+                  position: 'absolute', top: '0px', right: '0px',
+                  background: 'var(--color-foreground)', color: 'var(--color-background)',
+                  fontSize: '0.65rem', fontWeight: 700, width: '16px', height: '16px',
+                  borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                }}>
+                  {cartItemCount}
+                </span>
+              )}
+            </button>
+
+            {/* Theme Toggle */}
+            <button
+              onClick={() => {
+                setTheme(theme === 'dark' ? 'light' : 'dark')
+              }}
+              style={{
+                background: 'transparent',
                 border: '1px solid var(--color-border)',
-                background: 'var(--color-surface)',
+                borderRadius: '50%',
+                width: '36px',
+                height: '36px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                color: 'var(--color-foreground)',
+              }}
+              aria-label="Toggle Dark Mode"
+            >
+              {mounted && (theme === 'dark') 
+                ? <Sun size={18} /> 
+                : <Moon size={18} />
+              }
+            </button>
+
+            {/* CTA Button */}
+            <Link
+              href="#specs"
+              style={{
+                background: 'var(--color-foreground)',
+                color: 'var(--color-background)',
+                textDecoration: 'none',
+                padding: '0.5rem 1.25rem',
+                borderRadius: '9999px',
+                fontSize: '0.875rem',
+                fontWeight: 600,
+                transition: 'opacity 0.2s',
+              }}
+              className="hidden md:inline-flex hover:opacity-90"
+            >
+              Đặt trước
+            </Link>
+
+            {/* Mobile Menu Toggle */}
+            <button
+              style={{
+                background: 'transparent',
+                border: 'none',
                 color: 'var(--color-foreground)',
                 cursor: 'pointer',
-                transition: 'transform 0.2s, background 0.2s',
               }}
-              onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.transform = 'rotate(20deg)' }}
-              onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.transform = 'rotate(0deg)' }}
+              className="md:hidden"
+              onClick={() => setIsOpen(!isOpen)}
             >
-              {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
-          )}
-
-          {/* CTA */}
-          <Link
-            href="#order"
-            id="nav-cta"
-            style={{
-              padding: '0.5rem 1.25rem',
-              borderRadius: '9999px',
-              background: 'var(--color-foreground)',
-              color: 'var(--color-background)',
-              fontWeight: 600,
-              fontSize: '0.875rem',
-              textDecoration: 'none',
-              boxShadow: '0 4px 14px rgba(0, 0, 0, 0.1)',
-              transition: 'opacity 0.2s, transform 0.2s',
-            }}
-            onMouseEnter={(e) => {
-              ;(e.currentTarget as HTMLElement).style.opacity = '0.9'
-              ;(e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)'
-            }}
-            onMouseLeave={(e) => {
-              ;(e.currentTarget as HTMLElement).style.opacity = '1'
-              ;(e.currentTarget as HTMLElement).style.transform = 'translateY(0)'
-            }}
-            className="nav-cta-desktop"
-          >
-            Đặt trước
-          </Link>
-
-          {/* Hamburger */}
-          <button
-            id="menu-toggle"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="Toggle menu"
-            style={{
-              display: 'none',
-              width: '2.25rem', height: '2.25rem',
-              alignItems: 'center', justifyContent: 'center',
-              border: '1px solid var(--color-border)',
-              background: 'var(--color-surface)',
-              borderRadius: '0.5rem',
-              cursor: 'pointer',
-              color: 'var(--color-foreground)',
-            }}
-            className="menu-toggle-btn"
-          >
-            {menuOpen ? <X size={18} /> : <Menu size={18} />}
-          </button>
+          </motion.div>
         </div>
-      </nav>
+      </div>
 
-      {/* Mobile menu */}
-      {menuOpen && (
-        <div
-          style={{
-            background: 'var(--color-background)',
-            borderTop: '1px solid var(--color-border)',
-            padding: '1rem',
-          }}
-          className="mobile-menu"
-        >
-          <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-            {navLinks.map((link) => (
-              <li key={link.href}>
+      {/* Mobile Nav */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            style={{
+              overflow: 'hidden',
+              background: 'var(--color-surface)',
+              borderBottom: '1px solid var(--color-border)',
+            }}
+            className="md:hidden"
+          >
+            <ul style={{ listStyle: 'none', margin: 0, padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {navLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    style={{
+                      display: 'block',
+                      color: 'var(--color-foreground)',
+                      textDecoration: 'none',
+                      fontSize: '1rem',
+                      fontWeight: 500,
+                      padding: '0.5rem',
+                    }}
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+              <li>
                 <Link
-                  href={link.href}
-                  onClick={() => setMenuOpen(false)}
+                  href="#specs"
+                  onClick={() => setIsOpen(false)}
                   style={{
                     display: 'block',
-                    padding: '0.75rem 1rem',
-                    borderRadius: '0.5rem',
-                    fontSize: '0.9375rem',
-                    fontWeight: 500,
-                    color: 'var(--color-foreground)',
+                    background: 'var(--color-foreground)',
+                    color: 'var(--color-background)',
                     textDecoration: 'none',
-                    transition: 'background 0.2s',
+                    padding: '0.75rem',
+                    borderRadius: '0.5rem',
+                    textAlign: 'center',
+                    fontWeight: 600,
+                    marginTop: '0.5rem',
                   }}
                 >
-                  {link.label}
+                  Đặt trước ngay
                 </Link>
               </li>
-            ))}
-            <li>
-              <Link
-                href="#order"
-                onClick={() => setMenuOpen(false)}
-                style={{
-                  display: 'block',
-                  marginTop: '0.5rem',
-                  padding: '0.75rem 1rem',
-                  borderRadius: '0.5rem',
-                  background: 'var(--color-foreground)',
-                  color: 'var(--color-background)',
-                  fontWeight: 600,
-                  textAlign: 'center',
-                  textDecoration: 'none',
-                }}
-              >
-                Đặt trước ngay
-              </Link>
-            </li>
-          </ul>
-        </div>
-      )}
-
-      <style>{`
-        @media (max-width: 767px) {
-          .nav-desktop-links { display: none !important; }
-          .nav-cta-desktop { display: none !important; }
-          .menu-toggle-btn { display: flex !important; }
-        }
-        .dark header { --navbar-bg: 11 22 40; }
-      `}</style>
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   )
 }

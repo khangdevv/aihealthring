@@ -85,15 +85,18 @@ export default function Hero() {
 
             {/* Buttons */}
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '1rem' }}>
-              <Link 
-                href="#order"
+              <button 
+                onClick={() => {
+                  import('@/store/useStore').then(mod => {
+                    mod.useStore.getState().openProductModal('PulseRing Pro')
+                  })
+                }}
                 style={{
                   display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
                   padding: '0.875rem 1.75rem', borderRadius: '9999px',
                   background: 'var(--color-foreground)',
-                  color: 'var(--color-background)',
+                  color: 'var(--color-background)', border: 'none', cursor: 'pointer',
                   fontWeight: 600, fontSize: '0.9375rem',
-                  textDecoration: 'none',
                   transition: 'transform 0.2s, opacity 0.2s',
                   boxShadow: '0 4px 14px rgba(0,0,0,0.1)',
                 }}
@@ -102,7 +105,7 @@ export default function Hero() {
               >
                 Đặt trước ngay
                 <ArrowRight size={16} />
-              </Link>
+              </button>
               <Link 
                 href="#features"
                 style={{

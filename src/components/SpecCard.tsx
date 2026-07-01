@@ -73,7 +73,13 @@ export default function SpecCard({ title, price, isPro = false, specs, delay = 0
         ))}
       </ul>
 
-      <button style={{
+      <button 
+        onClick={() => {
+          import('@/store/useStore').then(mod => {
+            mod.useStore.getState().openProductModal(title as 'PulseRing Basic' | 'PulseRing Pro')
+          })
+        }}
+        style={{
         marginTop: '2.5rem',
         width: '100%',
         padding: '1rem',
