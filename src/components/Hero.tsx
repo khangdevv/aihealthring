@@ -162,21 +162,6 @@ export default function Hero() {
           </motion.div>
         </div>
       </div>
-
-      <style>{`
-        .hero-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: 3rem;
-          align-items: center;
-        }
-        @media (min-width: 1024px) {
-          .hero-grid {
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 4rem;
-          }
-        }
-      `}</style>
     </section>
   )
 }

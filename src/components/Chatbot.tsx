@@ -213,18 +213,6 @@ export default function Chatbot() {
           </motion.div>
         )}
       </AnimatePresence>
-      <style>{`
-        @media (max-width: 480px) {
-          .chatbot-window {
-            right: 0 !important;
-            bottom: 0 !important;
-            width: 100% !important;
-            height: 100vh !important;
-            max-height: 100vh !important;
-            border-radius: 0 !important;
-          }
-        }
-      `}</style>
     </>
   )
 }

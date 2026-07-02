@@ -136,3 +136,63 @@ body {
 @media (min-width: 1024px) {
   .section-py { padding-block: 7rem; }
 }
+
+/* Newsletter loading spinner */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* Hero grid layout */
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+@media (min-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+  }
+}
+
+/* ProductModal layout */
+.product-modal-layout {
+  flex-direction: column;
+}
+.product-modal-image {
+  min-height: 250px;
+  width: 100%;
+}
+.product-modal-content {
+  width: 100%;
+  overflow-y: auto;
+}
+@media (min-width: 768px) {
+  .product-modal-layout {
+    flex-direction: row;
+  }
+  .product-modal-image {
+    width: 50%;
+    min-height: 400px;
+  }
+  .product-modal-content {
+    width: 50%;
+  }
+}
+
+/* Chatbot responsive */
+@media (max-width: 480px) {
+  .chatbot-window {
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    border-radius: 0 !important;
+  }
+}

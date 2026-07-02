@@ -215,31 +215,6 @@ export default function ProductModal() {
           </div>
         </motion.div>
         
-        <style>{`
-          .product-modal-layout {
-            flex-direction: column;
-          }
-          .product-modal-image {
-            min-height: 250px;
-            width: 100%;
-          }
-          .product-modal-content {
-            width: 100%;
-            overflow-y: auto;
-          }
-          @media (min-width: 768px) {
-            .product-modal-layout {
-              flex-direction: row;
-            }
-            .product-modal-image {
-              width: 50%;
-              min-height: 400px;
-            }
-            .product-modal-content {
-              width: 50%;
-            }
-          }
-        `}</style>
       </div>
     </AnimatePresence>
   )

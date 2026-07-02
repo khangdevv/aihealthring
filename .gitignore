@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# documentation
+CLAUDE.md
+helicorp-vong2-noidung-timeline.md
+helicorp-vong2-de-bai.md
