@@ -151,7 +151,7 @@ export default function Hero() {
 
             <div style={{ position: 'relative', zIndex: 1, width: '100%', height: '100%', maxWidth: '500px', aspectRatio: '1/1' }}>
               <Image 
-                src="/titaniumsilver.png" 
+                src="/3_nhan_hero.png" 
                 alt="PulseRing AI" 
                 fill
                 sizes="(max-width: 768px) 100vw, 500px"

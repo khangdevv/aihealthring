@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Moon, Sun, ShoppingBag, Heart } from 'lucide-react'
+import Image from 'next/image'
 import { useTheme } from '@/components/Providers'
 import { useStore } from '@/store/useStore'
 
@@ -72,11 +73,11 @@ export default function Navbar() {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
             >
-              <span style={{ display: 'flex', alignItems: 'center', fontWeight: 700, fontSize: '1.125rem' }}>
-                Pulse
-                <img src="/ring.png" alt="Ring" style={{ height: '1.25rem', width: 'auto', margin: '0 0.125rem', filter: mounted && theme === 'dark' ? 'invert(1)' : 'none' }} />
-                AI
-              </span>
+                <span style={{ display: 'flex', alignItems: 'center', fontWeight: 700, fontSize: '1.125rem' }}>
+                  Pulse
+                  <Image src="/ring.png" alt="Ring" width={24} height={24} style={{ height: '1.25rem', width: 'auto', margin: '0 0.125rem', filter: mounted && theme === 'dark' ? 'invert(1)' : 'none' }} />
+                  AI
+                </span>
             </Link>
           </motion.div>
 

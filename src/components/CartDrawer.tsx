@@ -91,7 +91,7 @@ export default function CartDrawer() {
                       <li key={item.id} style={{ display: 'flex', gap: '1rem' }}>
                         {/* Img */}
                         <div style={{ width: '80px', height: '80px', background: 'var(--color-surface)', borderRadius: '0.75rem', position: 'relative', overflow: 'hidden' }}>
-                          <Image src={item.image} alt={item.model} fill style={{ objectFit: 'contain', padding: '0.5rem' }} />
+                          <Image src={item.image} alt={item.model} fill sizes="80px" style={{ objectFit: 'contain', padding: '0.5rem' }} />
                         </div>
                         {/* Details */}
                         <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
@@ -132,7 +132,7 @@ export default function CartDrawer() {
                     {wishlist.map((item) => (
                       <li key={item.id} style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
                         <div style={{ width: '80px', height: '80px', background: 'var(--color-surface)', borderRadius: '0.75rem', position: 'relative', overflow: 'hidden' }}>
-                          <Image src={item.image} alt={item.model} fill style={{ objectFit: 'contain', padding: '0.5rem' }} />
+                          <Image src={item.image} alt={item.model} fill sizes="80px" style={{ objectFit: 'contain', padding: '0.5rem' }} />
                         </div>
                         <div style={{ flex: 1 }}>
                           <h3 style={{ fontSize: '0.9375rem', fontWeight: 600, margin: '0 0 0.25rem 0' }}>{item.model}</h3>

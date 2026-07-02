@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Heart, Globe, MessageCircle, Play } from 'lucide-react'
 import { useTheme } from '@/components/Providers'
+import Image from 'next/image'
 
 const footerLinks = {
   product: [
@@ -58,7 +59,7 @@ export default function Footer() {
             >
               <span style={{ display: 'flex', alignItems: 'center', fontWeight: 700, fontSize: '1.125rem' }}>
                 Pulse
-                <img src="/ring.png" alt="Ring" style={{ height: '1.25rem', width: 'auto', margin: '0 0.125rem', filter: theme === 'dark' ? 'invert(1)' : 'none' }} />
+                <Image src="/ring.png" alt="Ring" width={24} height={24} style={{ height: '1.25rem', width: 'auto', margin: '0 0.125rem', filter: theme === 'dark' ? 'invert(1)' : 'none' }} />
                 AI
               </span>
             </Link>

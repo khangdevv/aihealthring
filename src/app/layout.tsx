@@ -36,7 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="vi" className={beVietnamPro.variable} suppressHydrationWarning>
-      <body>
+      <body suppressHydrationWarning>
         <ThemeProvider>
           <Navbar />
           <main style={{ flex: 1, paddingTop: '4rem' }}>{children}</main>
