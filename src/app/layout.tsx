@@ -7,6 +7,7 @@ import ThemeProvider from '@/components/Providers'
 import ProductModal from '@/components/ProductModal'
 import CartDrawer from '@/components/CartDrawer'
 import Chatbot from '@/components/Chatbot'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 
 const beVietnamPro = Be_Vietnam_Pro({
   variable: '--font-outfit',
@@ -43,6 +44,7 @@ export default function RootLayout({
           <ProductModal />
           <CartDrawer />
           <Chatbot />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>
